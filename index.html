@@ -221,4 +221,111 @@ body{
 <body>
 <!-- نفس النسخة الأصلية بدون أي تغيير -->
 </body>
+</html> position:relative;
+ z-index:2;
+ height:100vh;
+ overflow:auto;
+ padding:25px;
+}
+.top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:15px;
+ margin-bottom:25px;
+}
+.user-info{display:flex;gap:15px;flex-wrap:wrap}
+.info-card{
+ background:var(--card);
+ padding:14px 18px;
+ border-radius:18px;
+ box-shadow:var(--shadow);
+ min-width:170px;
+}
+.info-card small{display:block;color:#888}
+.settings{position:relative}
+.settings button{
+ background:var(--card);
+ border:0;
+ padding:10px 14px;
+ border-radius:14px;
+ box-shadow:var(--shadow);
+ font-size:18px;
+ cursor:pointer;
+}
+.menu{
+ display:none;
+ position:absolute;
+ left:0;
+ top:50px;
+ background:var(--card);
+ border-radius:16px;
+ box-shadow:var(--shadow);
+ overflow:hidden;
+}
+.menu div{
+ padding:14px 20px;
+ cursor:pointer;
+}
+.menu div:hover{background:rgba(0,0,0,.05)}
+.pages{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:20px;
+}
+.section{
+ grid-column:1/-1;
+ font-weight:bold;
+ color:var(--primary);
+ margin-top:35px;
+ font-size:18px;
+}
+.page{
+ background:var(--card);
+ padding:24px;
+ border-radius:22px;
+ box-shadow:var(--shadow);
+ text-align:center;
+ cursor:pointer;
+ transition:.25s;
+}
+.page:hover{
+ transform:translateY(-6px);
+ background:var(--primary);
+ color:#fff;
+}
+.modal{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.4);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:9;
+}
+.modal-box{
+ background:var(--card);
+ padding:30px;
+ border-radius:22px;
+ box-shadow:var(--shadow);
+ width:340px;
+}
+.modal-box input, .modal-box button{
+ width:100%;
+ padding:14px;
+ margin-top:12px;
+ border-radius:14px;
+ border:1px solid #ccc;
+}
+.modal-box button{
+ border:0;
+ background:var(--primary);
+ color:#fff;
+}
+</style>
+</head>
+<body>
+<!-- نفس النسخة الأصلية بدون أي تغيير -->
+</body>
 </html>
