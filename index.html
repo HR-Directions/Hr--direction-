@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HR Directions</title>
+<title>Dashboard</title>
 
 <style>
 :root{
@@ -11,18 +11,14 @@
  --card:#ffffff;
  --text:#222;
  --primary:#1976d2;
- --shadow:
-  0 -6px 20px rgba(0,0,0,.08),
-  0 12px 30px rgba(0,0,0,.18);
+ --shadow:0 -6px 20px rgba(0,0,0,.08),0 12px 30px rgba(0,0,0,.18);
 }
 body.dark{
  --bg:#0f0f0f;
  --card:#1c1c1c;
  --text:#eee;
  --primary:#64b5f6;
- --shadow:
-  0 -6px 20px rgba(0,0,0,.25),
-  0 14px 35px rgba(0,0,0,.55);
+ --shadow:0 -6px 20px rgba(0,0,0,.25),0 14px 35px rgba(0,0,0,.55);
 }
 body{
  margin:0;
@@ -32,7 +28,7 @@ body{
  overflow:hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 .bg{
  position:fixed;
  inset:0;
@@ -46,7 +42,7 @@ body{
  background:url('https://i.imgur.com/9yG8g.gif');
  background-size:cover;
  opacity:.12;
- animation:rotateStars 200s linear infinite;
+ animation:spin 200s linear infinite;
 }
 .bg .glow{
  position:absolute;
@@ -57,7 +53,7 @@ body{
  transform:translate(-50%,-50%);
  background:radial-gradient(circle, rgba(0,191,255,.45), transparent 70%);
  filter:blur(70px);
- animation:glowMove 15s ease-in-out infinite;
+ animation:glow 15s ease-in-out infinite;
 }
 .bg img{
  position:absolute;
@@ -66,47 +62,40 @@ body{
  width:50%;
  max-width:600px;
  transform:translate(-50%,-50%) scale(.9);
- animation:logoMove 15s ease-in-out infinite;
+ animation:logo 15s ease-in-out infinite;
  opacity:.85;
 }
 
-@keyframes rotateStars{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes glowMove{
- 0%,100%{transform:translate(-50%,-50%) scale(.9)}
- 50%{transform:translate(-40%,-50%) scale(1.2)}
-}
-@keyframes logoMove{
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{50%{transform:translate(-40%,-50%) scale(1.2)}}
+@keyframes logo{
  0%{opacity:0;transform:translate(-50%,-50%) scale(.8)}
- 20%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
- 50%{opacity:0;transform:translate(120%,-50%) scale(1)}
+ 20%{opacity:1}
+ 50%{opacity:0;transform:translate(120%,-50%)}
  51%{transform:translate(-120%,-50%) scale(.8)}
- 80%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}
+ 80%{opacity:1}
 }
 
-/* ================= FLOAT BACK BUTTON ================= */
+/* BACK BUTTON */
 .back-btn{
  position:fixed;
  top:18px;
  right:18px;
  z-index:99;
- background:var(--card);
- box-shadow:var(--shadow);
- border-radius:50%;
  width:46px;
  height:46px;
+ border-radius:50%;
+ background:var(--card);
+ box-shadow:var(--shadow);
  display:flex;
  align-items:center;
  justify-content:center;
  font-size:22px;
  cursor:pointer;
- transition:.25s;
-}
-.back-btn:hover{
- background:var(--primary);
- color:#fff;
+ display:none;
 }
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 .login{
  position:relative;
  z-index:2;
@@ -119,7 +108,6 @@ body{
  text-align:center;
 }
 .login img{width:120px;margin-bottom:15px}
-.login h2{color:var(--primary)}
 .login input{
  width:100%;
  padding:14px;
@@ -138,7 +126,7 @@ body{
 }
 .msg{margin-top:12px;color:red;font-weight:bold}
 
-/* ================= DASHBOARD ================= */
+/* DASHBOARD */
 .dashboard{
  display:none;
  position:relative;
@@ -155,8 +143,6 @@ body{
  gap:15px;
  margin-bottom:25px;
 }
-
-/* USER INFO */
 .user-info{display:flex;gap:15px;flex-wrap:wrap}
 .info-card{
  background:var(--card);
@@ -165,9 +151,6 @@ body{
  box-shadow:var(--shadow);
  min-width:170px;
 }
-.info-card small{display:block;color:#888}
-
-/* SETTINGS */
 .settings{position:relative}
 .settings button{
  background:var(--card);
@@ -176,7 +159,6 @@ body{
  border-radius:14px;
  box-shadow:var(--shadow);
  font-size:18px;
- cursor:pointer;
 }
 .menu{
  display:none;
@@ -188,10 +170,7 @@ body{
  box-shadow:var(--shadow);
  overflow:hidden;
 }
-.menu div{
- padding:14px 20px;
- cursor:pointer;
-}
+.menu div{padding:14px 20px;cursor:pointer}
 .menu div:hover{background:rgba(0,0,0,.05)}
 
 /* PAGES */
@@ -216,51 +195,25 @@ body{
  cursor:pointer;
  transition:.25s;
 }
-.page:hover{
- transform:translateY(-6px);
- background:var(--primary);
- color:#fff;
-}
+.page:hover{transform:translateY(-6px);background:var(--primary);color:#fff}
 
-/* MODAL */
-.modal{
+/* IFRAME */
+.viewer{
+ display:none;
  position:fixed;
  inset:0;
- background:rgba(0,0,0,.4);
- display:none;
- align-items:center;
- justify-content:center;
- z-index:9;
+ z-index:50;
+ background:#fff;
 }
-.modal-box{
- background:var(--card);
- padding:30px;
- border-radius:22px;
- box-shadow:var(--shadow);
- width:340px;
-}
-.modal-box input,
-.modal-box button{
+.viewer iframe{
  width:100%;
- padding:14px;
- margin-top:12px;
- border-radius:14px;
- border:1px solid #ccc;
-}
-.modal-box button{
+ height:100%;
  border:0;
- background:var(--primary);
- color:#fff;
 }
 
-/* ================= RESPONSIVE ================= */
 @media(max-width:768px){
  body{overflow:auto}
- .login{margin:40px 16px}
  .dashboard{padding:18px}
- .top{flex-direction:column}
- .user-info{flex-direction:column}
- .info-card{width:100%;text-align:center}
  .pages{grid-template-columns:1fr}
 }
 </style>
@@ -268,13 +221,13 @@ body{
 
 <body>
 
-<div class="bg" id="bg">
+<div class="bg">
  <div class="stars"></div>
  <div class="glow"></div>
  <img src="https://lh3.googleusercontent.com/pw/AP1GczMiRkDmMrZOPEMglikz95yOdSkrhKpx46bQE-TsNpqt8Cc-zZ53W7zBe3vVum7ljY-ynEQB8PIlpgmDjkrfSIv5JG-j1qGCNS-uk_iGnmMaql_MuCwKC7F4G7gd1Hn4GRWdyJ0L9HYHt4HLpnTtMQxH=w2499-h1214-s-no-gm">
 </div>
 
-<div class="back-btn" onclick="history.back()">⬅️</div>
+<div class="back-btn" id="backBtn" onclick="closePage()">⬅️</div>
 
 <!-- LOGIN -->
 <div class="login" id="loginBox">
@@ -291,9 +244,8 @@ body{
  <div class="top">
   <div class="user-info" id="info"></div>
   <div class="settings">
-   <button onclick="toggleMenu()">⚙️</button>
+   <button onclick="menu.style.display=menu.style.display=='block'?'none':'block'">⚙️</button>
    <div class="menu" id="menu">
-    <div onclick="openPass()">🔑 تغيير كلمة المرور</div>
     <div onclick="toggleDark()">🌙 Dark Mode</div>
     <div onclick="logout()">🚪 تسجيل خروج</div>
    </div>
@@ -302,13 +254,9 @@ body{
  <div class="pages" id="pages"></div>
 </div>
 
-<!-- CHANGE PASSWORD -->
-<div class="modal" id="passModal">
- <div class="modal-box">
-  <h3>تغيير كلمة المرور</h3>
-  <input id="newPass" type="password" placeholder="كلمة المرور الجديدة">
-  <button onclick="changePass()">حفظ</button>
- </div>
+<!-- PAGE VIEW -->
+<div class="viewer" id="viewer">
+ <iframe id="frame"></iframe>
 </div>
 
 <script>
@@ -316,18 +264,13 @@ const DB="https://hr-mange-1ec00-default-rtdb.firebaseio.com";
 let currentUser=null;
 
 function login(){
- msg.innerHTML="";
- const u=username.value.trim().toLowerCase();
- const p=password.value.trim();
- if(!u||!p){msg.innerHTML="⚠️ أدخل البيانات";return;}
-
  fetch(DB+"/USAR.json").then(r=>r.json()).then(d=>{
   for(const id in d){
-   if(String(d[id].username).toLowerCase()==u && String(d[id].password)==p){
-    currentUser={...d[id],_id:id};
+   if(d[id].username.toLowerCase()==username.value.toLowerCase()
+   && d[id].password==password.value){
+    currentUser=d[id];
     localStorage.setItem("session",JSON.stringify(currentUser));
-    loadDashboard();
-    return;
+    loadDashboard();return;
    }
   }
   msg.innerHTML="❌ بيانات غير صحيحة";
@@ -353,7 +296,7 @@ function loadPages(){
     const key=(data[s].title||s)+"|"+data[s].items[p].name;
     if(currentUser.pages?.[key]){
      has=true;
-     list+=`<div class="page" onclick="location.href='${data[s].items[p].url}'">${data[s].items[p].name}</div>`;
+     list+=`<div class="page" onclick="openPage('${data[s].items[p].url}')">${data[s].items[p].name}</div>`;
     }
    }
    if(has) pages.innerHTML+=`<div class="section">${data[s].title||s}</div>${list}`;
@@ -361,23 +304,23 @@ function loadPages(){
  });
 }
 
-function toggleMenu(){menu.style.display=menu.style.display=="block"?"none":"block"}
-function toggleDark(){document.body.classList.toggle("dark")}
-function logout(){
- localStorage.removeItem("session");
- location.reload();
-}
-function openPass(){passModal.style.display="flex"}
-function changePass(){
- fetch(`${DB}/USAR/${currentUser._id}.json`,{
-  method:"PATCH",
-  headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({password:newPass.value})
- }).then(()=>{alert("تم التغيير");passModal.style.display="none"});
+function openPage(url){
+ viewer.style.display="block";
+ frame.src=url;
+ backBtn.style.display="flex";
 }
 
+function closePage(){
+ viewer.style.display="none";
+ frame.src="";
+ backBtn.style.display="none";
+}
+
+function toggleDark(){document.body.classList.toggle("dark")}
+function logout(){localStorage.clear();location.reload()}
+
 const s=localStorage.getItem("session");
-if(s){currentUser=JSON.parse(s);loadDashboard();}
+if(s){currentUser=JSON.parse(s);loadDashboard()}
 </script>
 
 </body>
